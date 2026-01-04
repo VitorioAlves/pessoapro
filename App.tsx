@@ -62,6 +62,7 @@ const App: React.FC = () => {
   const [audioFeedback, setAudioFeedback] = useState(true);
   const [dateFormat, setDateFormat] = useState('DD/MM/YYYY');
   const [sessionTime, setSessionTime] = useState('60');
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   useEffect(() => {
     // Check active sessions and sets the user
@@ -177,11 +178,13 @@ const App: React.FC = () => {
   const openEdit = (person: Person) => {
     setEditingPerson(person);
     setIsFormOpen(true);
+    setIsSidebarOpen(false);
   };
 
   const openAdd = () => {
     setEditingPerson(undefined);
     setIsFormOpen(true);
+    setIsSidebarOpen(false);
   };
 
   const toggleTheme = () => setIsDarkMode(prev => !prev);
@@ -195,15 +198,42 @@ const App: React.FC = () => {
   }
 
   return (
-    <div className={`min-h-screen transition-colors duration-300 font-['Inter'] ${isDarkMode ? 'bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} md:pl-64 flex flex-col`}>
+    <div className={`min-h-screen transition-colors duration-300 font-['Inter'] ${isDarkMode ? 'dark bg-slate-950 text-slate-100' : 'bg-slate-50 text-slate-900'} md:pl-64 flex flex-col`}>
       <Sidebar
         currentView={view}
-        setView={setView}
+        setView={(v) => {
+          setView(v);
+          setIsSidebarOpen(false);
+        }}
         onLogout={handleLogout}
         userName={currentUser}
         isDarkMode={isDarkMode}
         toggleTheme={toggleTheme}
+        isOpen={isSidebarOpen}
+        onClose={() => setIsSidebarOpen(false)}
       />
+
+      {/* Mobile Top Header */}
+      <header className="md:hidden sticky top-0 z-30 flex items-center justify-between px-6 py-4 bg-white dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 backdrop-blur-md bg-opacity-80 dark:bg-opacity-80">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white shadow-lg">GP</div>
+          <h1 className="font-bold text-slate-800 dark:text-white">Gestão Pro</h1>
+        </div>
+        <button
+          onClick={() => setIsSidebarOpen(true)}
+          className="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-xl transition-colors"
+        >
+          <Icons.Dashboard />
+        </button>
+      </header>
+
+      {/* Overlay for mobile sidebar */}
+      {isSidebarOpen && (
+        <div
+          className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-30 md:hidden animate-in fade-in duration-300"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
 
       <main className="flex-1 p-6 lg:p-10 relative">
         <div className="max-w-5xl mx-auto h-full">

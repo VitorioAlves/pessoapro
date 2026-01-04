@@ -91,13 +91,13 @@ const PersonForm: React.FC<PersonFormProps> = ({ person, onSave, onCancel }) => 
   };
 
   return (
-    <div className="bg-white dark:bg-slate-900 rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-colors">
-      <div className="bg-gradient-to-r from-blue-600 to-blue-800 px-8 py-8 text-white">
-        <h2 className="text-2xl font-black tracking-tight">{person ? 'EDITAR REGISTRO' : 'NOVO CADASTRO'}</h2>
-        <p className="text-blue-100/80 text-sm mt-1">Insira as informações necessárias para manter a base atualizada.</p>
+    <div className="bg-white dark:bg-slate-900 rounded-2xl sm:rounded-[2rem] shadow-2xl overflow-hidden border border-slate-200 dark:border-slate-800 transition-colors">
+      <div className="bg-gradient-to-r from-blue-600 to-blue-800 px-6 sm:px-8 py-6 sm:py-8 text-white">
+        <h2 className="text-xl sm:text-2xl font-black tracking-tight">{person ? 'EDITAR REGISTRO' : 'NOVO CADASTRO'}</h2>
+        <p className="text-blue-100/80 text-xs sm:text-sm mt-1">Insira as informações necessárias para manter a base atualizada.</p>
       </div>
 
-      <form onSubmit={handleSubmit} className="p-8 space-y-10">
+      <form onSubmit={handleSubmit} className="p-6 sm:p-8 space-y-8 sm:space-y-10">
         <section>
           <div className="flex items-center gap-2 mb-6 border-b border-slate-100 dark:border-slate-800 pb-2">
             <span className="bg-blue-100 dark:bg-blue-900/30 text-blue-600 p-1 rounded">

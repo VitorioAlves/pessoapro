@@ -10,15 +10,19 @@ interface SidebarProps {
   userName: string;
   isDarkMode: boolean;
   toggleTheme: () => void;
+  isOpen?: boolean;
+  onClose?: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ 
-  currentView, 
-  setView, 
-  onLogout, 
+const Sidebar: React.FC<SidebarProps> = ({
+  currentView,
+  setView,
+  onLogout,
   userName,
   isDarkMode,
-  toggleTheme 
+  toggleTheme,
+  isOpen,
+  onClose
 }) => {
   const menuItems = [
     { id: 'dashboard' as AppView, label: 'Dashboard', icon: <Icons.Dashboard /> },
@@ -27,13 +31,23 @@ const Sidebar: React.FC<SidebarProps> = ({
   ];
 
   return (
-    <aside className="fixed left-0 top-0 h-full w-64 bg-blue-900 dark:bg-slate-900 text-white flex flex-col z-40 transition-all duration-300 transform -translate-x-full md:translate-x-0 border-r border-blue-800 dark:border-slate-800">
-      <div className="p-6 border-b border-blue-800 dark:border-slate-800 flex items-center gap-3">
-        <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg">GP</div>
-        <div>
-          <h1 className="font-bold text-lg leading-tight">Gestão Pro</h1>
-          <p className="text-xs text-blue-300 dark:text-blue-400">Pessoas & Controle</p>
+    <aside className={`fixed left-0 top-0 h-full w-64 bg-blue-900 dark:bg-slate-900 text-white flex flex-col z-40 transition-all duration-300 transform ${isOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 border-r border-blue-800 dark:border-slate-800`}>
+      <div className="p-6 border-b border-blue-800 dark:border-slate-800 flex items-center justify-between gap-3">
+        <div className="flex items-center gap-3">
+          <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-xl shadow-lg">GP</div>
+          <div>
+            <h1 className="font-bold text-lg leading-tight">Gestão Pro</h1>
+            <p className="text-xs text-blue-300 dark:text-blue-400">Pessoas & Controle</p>
+          </div>
         </div>
+        {onClose && (
+          <button
+            onClick={onClose}
+            className="md:hidden p-2 hover:bg-white/10 rounded-lg transition-colors"
+          >
+            <Icons.Delete />
+          </button>
+        )}
       </div>
 
       <nav className="flex-1 py-6 px-3 space-y-2">
@@ -41,11 +55,10 @@ const Sidebar: React.FC<SidebarProps> = ({
           <button
             key={item.id}
             onClick={() => setView(item.id)}
-            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${
-              currentView === item.id 
-                ? 'bg-blue-600 text-white font-medium shadow-lg' 
+            className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl transition-all ${currentView === item.id
+                ? 'bg-blue-600 text-white font-medium shadow-lg'
                 : 'text-blue-200 hover:bg-blue-800 dark:hover:bg-slate-800 hover:text-white'
-            }`}
+              }`}
           >
             {item.icon}
             {item.label}

@@ -44,7 +44,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
       </header>
 
       {/* Cards Rápidos */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <SummaryCard
           title="Inspeção Humana (IH)"
           value={stats[Situacao.IH] || 0}
@@ -114,7 +114,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
         </div>
 
         {/* Resumo de Atividades Recentes */}
-        <div className="lg:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
+        <div className="lg:col-span-2 bg-slate-50 dark:bg-slate-800/50 p-4 sm:p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm transition-colors">
           <div className="flex items-center gap-2 mb-4">
             <div className="p-2 bg-emerald-600 rounded-lg text-white">
               <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -168,7 +168,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
 
       <div className="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm transition-colors">
         <h3 className="text-lg font-bold text-slate-800 dark:text-white mb-6">Comparativo de Volume</h3>
-        <div className="h-80 w-full">
+        <div className="h-64 sm:h-80 w-full text-xs">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={pieData}>
               <XAxis
@@ -183,7 +183,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
                 tick={{ fill: document.documentElement.classList.contains('dark') ? '#94a3b8' : '#64748b', fontSize: 12 }}
               />
               <Tooltip
-                cursor={{ fill: document.documentElement.classList.contains('dark') ? 'rgba(30, 41, 59, 0.3)' : 'rgba(0, 0, 0, 0.05)' }}
+                cursor={false}
                 contentStyle={{
                   borderRadius: '12px',
                   border: 'none',
@@ -198,7 +198,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
                   color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
                 }}
               />
-              <Bar dataKey="value" radius={[8, 8, 0, 0]}>
+              <Bar dataKey="value" barSize={45} radius={[8, 8, 0, 0]}>
                 {pieData.map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS_MAP[entry.name] || '#ccc'} />
                 ))}

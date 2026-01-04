@@ -160,8 +160,8 @@ const PersonTable: React.FC<PersonTableProps> = ({ people, onEdit, onDelete, onA
     <div className="space-y-6 animate-in slide-in-from-bottom-4 duration-500">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Gestão de Registros</h1>
-          <p className="text-slate-500 dark:text-slate-400 font-medium">Controle total e busca avançada na base de dados.</p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-slate-800 dark:text-white tracking-tight">Gestão de Registros</h1>
+          <p className="text-sm sm:text-base text-slate-500 dark:text-slate-400 font-medium">Controle total e busca avançada na base de dados.</p>
         </div>
         <div className="flex flex-wrap gap-3">
           <button
@@ -198,8 +198,8 @@ const PersonTable: React.FC<PersonTableProps> = ({ people, onEdit, onDelete, onA
             </div>
             <input
               type="text"
-              placeholder="Busca Inteligente (Nome, CPF, MAI, Contatos...)"
-              className="block w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-2 border-blue-100 dark:border-slate-700 rounded-2xl text-base placeholder-slate-400 dark:placeholder-slate-500 dark:text-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:focus:border-blue-600 transition-all shadow-sm"
+              placeholder="Busca Inteligente..."
+              className="block w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-2 border-blue-100 dark:border-slate-700 rounded-2xl text-sm sm:text-base placeholder-slate-400 dark:placeholder-slate-500 dark:text-white focus:outline-none focus:ring-4 focus:ring-blue-500/10 focus:border-blue-500 dark:focus:border-blue-600 transition-all shadow-sm"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
