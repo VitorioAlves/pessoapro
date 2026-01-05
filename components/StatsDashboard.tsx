@@ -97,6 +97,11 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
                     border: 'none',
                     boxShadow: '0 10px 15px -3px rgba(0, 0, 0, 0.1)',
                     backgroundColor: document.documentElement.classList.contains('dark') ? '#0f172a' : '#fff',
+                  }}
+                  itemStyle={{
+                    color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
+                  }}
+                  labelStyle={{
                     color: document.documentElement.classList.contains('dark') ? '#fff' : '#000'
                   }}
                 />
@@ -107,7 +112,7 @@ const StatsDashboard: React.FC<StatsDashboardProps> = ({ people }) => {
             {pieData.map(d => (
               <div key={d.name} className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full" style={{ backgroundColor: COLORS_MAP[d.name] }}></div>
-                <span className="text-slate-600 dark:text-slate-400 truncate">{d.name}: {d.value}</span>
+                <span className="text-slate-600 dark:text-slate-200 truncate">{d.name}: {d.value}</span>
               </div>
             ))}
           </div>
